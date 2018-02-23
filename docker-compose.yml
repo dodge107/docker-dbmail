@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+  db:
+    image: postgres:9.6
+    volumes:
+      - $HOME/persisted-data/db:/var/lib/postgresql/data
+
+  imapd:
+    build: .
+    depends_on:
+      - db
+    environment:
+      - PGDATABASE=dbmail
+      - PGHOST=db
+      - PGUSER=postgres
+    ports:
+      - "5143:143"
