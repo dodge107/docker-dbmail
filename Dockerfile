@@ -27,3 +27,4 @@ COPY ./conf/dbmail.conf /usr/local/etc
 
 COPY ./bin/entrypoint.sh /root
 ENTRYPOINT ["/root/entrypoint.sh"]
+CMD ["imapd"]

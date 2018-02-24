@@ -5,6 +5,10 @@ services:
     image: postgres:9.6
     volumes:
       - $HOME/persisted-data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=dbmail
+      - POSTGRES_PASSWORD=dbmail
+      - POSTGRES_USER=dbmail
 
   imapd:
     build: .
@@ -13,6 +17,8 @@ services:
     environment:
       - PGDATABASE=dbmail
       - PGHOST=db
-      - PGUSER=postgres
+      - PGPASSWORD=dbmail
+      - PGPORT=5432
+      - PGUSER=dbmail
     ports:
       - "5143:143"
