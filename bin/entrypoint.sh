@@ -30,8 +30,16 @@ wait_for_port() {
   done
 }
 
+complete_config() {
+  sed -i \
+    "s#dburi =#dburi = postgresql://${PGUSER}:${PGPASSWORD}@${PGHOST}:${PGPORT}/${PGDATABASE}#" \
+    /usr/local/etc/dbmail.conf
+}
+
 case "$1" in
 imapd)
+  ensure_pg_envs_are_set
+  complete_config
   exec dbmail-imapd -v -D
   ;;
 
