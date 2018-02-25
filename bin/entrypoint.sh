@@ -21,7 +21,7 @@ wait_for_port() {
   while true; do
     sleep 2
     printf "${n} ... "
-    nc -v -w 1 $host $port && break
+    echo | nc -v -w 1 $host $port && break
     ((n--))
 
     test $n -gt 0 && continue
